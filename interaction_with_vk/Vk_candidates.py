@@ -5,14 +5,13 @@ from interaction_with_vk.settings import token_group, access_token, version
 from vk_api.exceptions import ApiError
 
 
-class VkUser:
+class VkCandidate:
     def __init__(self):
         self.vk = vk_api.VkApi(token=token_group)
         self.vk_ = vk_api.VkApi(token=access_token)
 
     def search_candidates(self, sex, age_from, age_to, city):
         candidates = []
-        link_profile = 'https://vk.com/id'
         response = self.vk_.method('users.search',
                               {'sort': 1,
                                'sex': sex,
@@ -20,14 +19,13 @@ class VkUser:
                                'age_from': age_from,
                                'age_to': age_to,
                                'has_photo': 1,
-                               'count': 25,
+                               'count': 1000,
                                'hometown': city
                                })
         for element in response['items']:
             candidate = [
                 element['first_name'],
                 element['last_name'],
-                link_profile + str(element['id']),
                 element['id']
             ]
             candidates.append(candidate)
@@ -55,14 +53,17 @@ class VkUser:
                      'photo' + str(response['items'][i]['owner_id']) + '_' + str(response['items'][i]['id'])])
             except IndexError:
                 photos_candidate.append(['Нет фото'])
-        return photos_candidate
+        top_photos = []
+        for item in self.sorting_likes(photos_candidate):
+            top_photos.append(item[1])
+        return top_photos
 
     def sorting_likes(self, photos):
         top_photos = []
         for photo in photos:
             if photo != ['Нет фото'] and photos != 'Нет доступа':
                 top_photos.append(photo)
-        return sorted(top_photos)
+        return sorted(top_photos)[:3]
 
     def file_crietion(self, file):
         today = datetime.date.today()
