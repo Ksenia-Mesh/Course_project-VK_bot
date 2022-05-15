@@ -23,7 +23,7 @@ for event in longpoll.listen():
             if event.user_id in bots:
                 bot = bots[event.user_id]
             else:
-                bot = BotVk(vk=vk, vk_user_id=event.user_id, session=session)
+                bot = BotVk(vk=vk, vk_user_id=str(event.user_id), session=session)
                 bots[event.user_id] = bot
 
             request = event.text

@@ -39,8 +39,8 @@ class BotVk:
 
     def hello_handler(self):
         message = 'Добро пожаловать! Начните поиск прямо сейчас!!!'
-        self.vk.method(
-            ('messages.send', {'user_id': self.vk_user_id, 'message': message, 'random_id': randrange(10 ** 7), }))
+        self.vk.method('messages.send',
+                       {'user_id': self.vk_user_id, 'message': message, 'random_id': randrange(10 ** 7), })
 
     def start_handler(self):
         pass
@@ -73,15 +73,13 @@ class BotVk:
                 message = f'{item[0]} {item[1]} - https://vk.com/id{item[2]}'
             else:
                 message = f'{item[0]} {item[1]} - https://vk.com/{item[2]}'
-            self.vk.method(
-                ('messages.send', {'user_id': self.vk_user_id, 'message': message, 'random_id': randrange(10 ** 7), }))
+            self.vk.method('messages.send',
+                           {'user_id': self.vk_user_id, 'message': message, 'random_id': randrange(10 ** 7), })
 
     def goodbye_handler(self):
         message = 'Всего хорошего!'
-        self.vk.method(
-            ('messages.send', {'user_id': self.vk_user_id, 'message': message, 'random_id': randrange(10 ** 7), }))
+        self.vk.method('messages.send', {'user_id': self.vk_user_id, 'message': message, 'random_id': randrange(10 ** 7), })
 
     def unknown_handler(self):
         message = 'Не понимаю вас((('
-        self.vk.method(
-            ('messages.send', {'user_id': self.vk_user_id, 'message': message, 'random_id': randrange(10 ** 7), }))
+        self.vk.method('messages.send', {'user_id': self.vk_user_id, 'message': message, 'random_id': randrange(10 ** 7), })
