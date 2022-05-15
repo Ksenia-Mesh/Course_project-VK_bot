@@ -1,4 +1,6 @@
 from models.users import Users
+from models.candidates import Candidates
+from models.user_candidate import UserCandidate
 
 
 class UserDb:
@@ -17,7 +19,7 @@ class UserDb:
         if self.session.query(Users).filter(Users.vk_id == self.vk_user_id).first():
             if self.session.query(Users.age).filter(
                     Users.vk_id == self.vk_user_id).first() == self.age and self.session.query(Users.city).filter(
-                    Users.vk_id == self.vk_user_id).first() == self.city:
+                Users.vk_id == self.vk_user_id).first() == self.city:
                 return True
             else:
                 self.update_user()
@@ -56,3 +58,9 @@ class UserDb:
 
         user.candidates.append(candidate)
         self.session.commit()
+
+    def candidates_list(self, user):
+        return self.session.query(Candidates.first_name, Candidates.last_name, Candidates.vk_id).join(
+            UserCandidate).join(
+            Users).filter(
+            Users.vk_id == user.vk_user_id).all()

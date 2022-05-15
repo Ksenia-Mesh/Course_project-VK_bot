@@ -4,6 +4,7 @@ import datetime
 from interaction_with_vk.settings import token_group, access_token, version
 from vk_api.exceptions import ApiError
 
+
 class VkUser:
     def __init__(self):
         self.vk = vk_api.VkApi(token=token_group)

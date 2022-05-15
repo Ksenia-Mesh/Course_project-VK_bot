@@ -12,6 +12,7 @@ longpoll = VkLongPoll(vk)
 session = Session()
 connection = engine.connect()
 
+
 # Регистрация пользователя
 def register_user(vk_id):
     try:
