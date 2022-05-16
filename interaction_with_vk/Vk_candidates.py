@@ -32,6 +32,7 @@ class VkCandidate:
 
             candidates.append(candidate)
             shuffle(candidates)
+
         return candidates
 
     def get_photo(self, owner_id):
@@ -71,4 +72,4 @@ class VkCandidate:
         for photo in photos:
             if photo != ['Нет фото'] and photos != 'Нет доступа':
                 top_photos.append(photo)
-        return sorted(top_photos)[:3]
+        return sorted(top_photos, reverse=True)[:3]

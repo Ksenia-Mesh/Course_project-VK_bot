@@ -32,7 +32,7 @@ class BotVk:
         return user
 
     def message_handler(self, message=None):
-        if message.lower() in ['привет']:
+        if message.lower() in ['привет', 'hello', 'hi', 'прив', 'хай']:
             keyboard = VkKeyboard()
             buttons = ['начать поиск', 'добавить кандидата', 'следующий кандидат', 'смотреть избранных']
             buttons_color = [VkKeyboardColor.PRIMARY, VkKeyboardColor.POSITIVE, VkKeyboardColor.NEGATIVE,
