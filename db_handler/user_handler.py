@@ -19,7 +19,7 @@ class UserDb:
         if self.session.query(Users).filter(Users.vk_id == self.vk_user_id).first():
             if self.session.query(Users.age).filter(
                     Users.vk_id == self.vk_user_id).first() == self.age and self.session.query(Users.city).filter(
-                Users.vk_id == self.vk_user_id).first() == self.city:
+                    Users.vk_id == self.vk_user_id).first() == self.city:
                 return True
             else:
                 self.update_user()
