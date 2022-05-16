@@ -17,7 +17,12 @@ from vk_bot import BotVk
 vk = VkApi(token=token_group)
 longpoll = VkLongPoll(vk)
 
-engine = create_engine('postgresql+psycopg2://alexd:12345@localhost:5432/vkinder')
+USERNAME = ''
+PASSWORD = ''
+PORT = ''
+DATABASE = ''
+
+engine = create_engine(f'postgresql+psycopg2://{USERNAME}:{PASSWORD}@localhost:{PORT}/{DATABASE}')
 
 Base.metadata.create_all(engine)
 
