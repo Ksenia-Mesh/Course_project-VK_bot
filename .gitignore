@@ -1,0 +1,6 @@
+/venv
+/.idea
+/__pycache__
+/models/__pycache__
+/db_handler/__pycache__
+/interaction_with_vk/__pycache__
