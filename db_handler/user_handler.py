@@ -1,4 +1,6 @@
 from models.users import Users
+from models.candidates import Candidates
+from models.user_candidate import UserCandidate
 
 
 class UserDb:
@@ -56,3 +58,9 @@ class UserDb:
 
         user.candidates.append(candidate)
         self.session.commit()
+
+    def candidates_list(self, user):
+        return self.session.query(Candidates.first_name, Candidates.last_name, Candidates.vk_id).join(
+            UserCandidate).join(
+            Users).filter(
+            Users.vk_id == user.vk_user_id).all()

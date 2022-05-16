@@ -9,7 +9,7 @@ class CandidateDB:
         self.vk_id = vk_id
 
     def exists(self):
-        """Метод проверки наличия пользователя в бд."""
+        """Метод проверки наличия кандидата в бд."""
 
         return self.session.query(Candidates).filter(Candidates.vk_id == self.vk_id).first()
 
