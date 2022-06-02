@@ -53,6 +53,13 @@ class UserDb:
         user.age = self.age
         user.city = self.city
 
+        try:
+            self.session.add(user)
+            self.session.commit()
+        except SQLAlchemyError:
+            self.session.rollback()
+            return 'DB ERROR'
+        
         self.session.add(user)
         self.session.commit()
 
@@ -61,8 +68,12 @@ class UserDb:
 
         user = self.session.query(Users).filter(Users.vk_id == self.vk_user_id).first()
 
-        user.candidates.append(candidate)
-        self.session.commit()
+        try:
+            user.candidates.append(candidate)
+            self.session.commit()
+        except SQLAlchemyError:
+            self.session.rollback()
+            return 'DB ERROR'
 
     def candidates_list(self, user):
         return self.session.query(Candidates.first_name, Candidates.last_name, Candidates.vk_id).join(
