@@ -1,12 +1,16 @@
 import vk_api
 
 from datetime import datetime
-from interaction_with_vk.settings import token_group
+import configparser
+
+
+config = configparser.ConfigParser()
+config.read('settings.ini')
 
 
 class VkUser:
     def __init__(self):
-        self.vk = vk_api.VkApi(token=token_group)
+        self.vk = vk_api.VkApi(token=config["Params"]["token_group"])
         self.vk_api = self.vk.get_api()
 
     def get_user_sex(self, user_id):

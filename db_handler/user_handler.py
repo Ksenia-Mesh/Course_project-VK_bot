@@ -2,6 +2,8 @@ from models.users import Users
 from models.candidates import Candidates
 from models.user_candidate import UserCandidate
 
+from sqlalchemy.exc import SQLAlchemyError
+
 
 class UserDb:
     def __init__(self, session, vk_user_id, age, sex, city):
@@ -36,9 +38,12 @@ class UserDb:
             age=self.age,
             city=self.city
         )
-
-        self.session.add(user)
-        self.session.commit()
+        try:
+            self.session.add(user)
+            self.session.commit()
+        except SQLAlchemyError:
+            self.session.rollback()
+            return 'DB ERROR'
 
     def update_user(self):
         """Метод обновления возраста и города в бд."""

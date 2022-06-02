@@ -2,14 +2,18 @@ import vk_api
 
 from random import shuffle
 
-from interaction_with_vk.settings import token_group, access_token, version
 from vk_api.exceptions import ApiError
+import configparser
+
+
+config = configparser.ConfigParser()
+config.read('settings.ini')
 
 
 class VkCandidate:
     def __init__(self):
-        self.vk = vk_api.VkApi(token=token_group)
-        self.vk_ = vk_api.VkApi(token=access_token)
+        self.vk = vk_api.VkApi(token=config["Params"]["token_group"])
+        self.vk_ = vk_api.VkApi(token=config["Params"]["access_token"])
 
     def search_candidates(self, sex, age_from, age_to, city):
         candidates = []
@@ -39,8 +43,8 @@ class VkCandidate:
         try:
             response = self.vk_.method('photos.get',
                                        {
-                                           'access_token': access_token,
-                                           'version': version,
+                                           'access_token': config["Params"]["access_token"],
+                                           'version': config["Params"]["version"],
                                            'owner_id': owner_id,
                                            'album_id': 'profile',
                                            'count': 10,
