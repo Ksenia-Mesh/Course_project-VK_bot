@@ -23,5 +23,10 @@ class PhotoDB:
 
         )
 
-        self.session.add(photo)
-        self.session.commit()
+        try:
+            self.session.add(photo)
+            self.session.commit()
+        except SQLAlchemyError:
+            self.session.rollback()
+            return 'DB ERROR'
+
