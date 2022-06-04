@@ -70,7 +70,7 @@ alter database <db_name> owner to <user_name>;
 | ID Пользователя: Integer, FK(Пользователь.ID Пользователя)|
 
 ## Логика работы чат-бота
- - В файле *main.py* заполните **USERNAME**, **PASSWORD**, **PORT**, **DATABASE**. В файле *interaction_with_vk\settings.py* заполните **token_group**, **access_token**.
+ - В файле *main.py* необходимо заполнить **USERNAME**, **PASSWORD**, **PORT**, **DATABASE**. В файле *interaction_with_vk\settings.py* заполните **token_group**, **access_token**.
  - Бот получает информацию от пользователя с помощь *get_user_sex*, *get_user_city*, *get_user_age* в классе **VkUser** (пакет interaction_with_vk  модуль Vk_users.py)
  - С помощью модуля *vk_api* осуществляем поиск кандидатов по критериям, используется метод *search_candidates* в классе **VkCandidate** (пакет interaction_with_vk модуль Vk_candidates.py)
  - Для нахождения фото людей используется метод *get_photo* (пакет interaction_with_vk модуль Vk_candidates.py)
